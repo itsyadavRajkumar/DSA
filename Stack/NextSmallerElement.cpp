@@ -2,6 +2,15 @@
 using namespace std;
 #define ll long long
 
+/*
+
+Input 1:
+    A = [4, 5, 2, 10, 8]
+Output 1:
+    G = [-1, 4, -1, 2, 2]
+
+*/
+
 vector<int> prevSmaller(vector<int> &A)
 {
 	int n = A.size();
