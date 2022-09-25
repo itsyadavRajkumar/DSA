@@ -98,6 +98,30 @@ private:
 		cout << '\n';
 	}
 
+	Node *reverseIterative(Node *head) {
+		Node *pre = NULL, *curr = head, *nxt = head;
+		while (curr != NULL) {
+			nxt = curr->next;
+			curr->next = pre;
+			if (pre != nullptr)
+				pre->prev = curr;
+			pre = curr;
+			curr = nxt;
+		}
+		return pre;
+	}
+
+	Node *reverseRecursive(Node *head) {
+		if (head == NULL || head->next == NULL) return head;
+		Node *restNode = reverseRecursive(head->next);
+		auto nxt = head->next;
+		nxt->next = head;
+		head->prev = nxt;
+		head->next = nullptr;
+		restNode->prev = nullptr;
+		return restNode;
+	}
+
 public:
 	void create(int val) {
 		tail = create(val, tail);
@@ -110,8 +134,13 @@ public:
 		// insertAtKPosition(111, 2, head);
 	}
 
+	void reverse() {
+		// head = reverseIterative(head);
+		head = reverseRecursive(head);
+	}
+
 	void print() {
-		printNext(head);
+		// printNext(head);
 		printPrev(head);
 	}
 };
@@ -123,6 +152,8 @@ int main() {
 		int val; cin >> val;
 		ob.create(val);
 	}
+	ob.print();
+	ob.reverse();
 	ob.print();
 	return 0;
 }
