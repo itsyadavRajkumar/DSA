@@ -16,7 +16,7 @@ class Solution {
 private:
 	Node *head, *tail;
 public:
-	Solution() : head(NULL), tail(NULL) {}
+	Solution(): head(NULL), tail(NULL) {}
 private:
 	Node *create(int val, Node *head) {
 		Node *newNode = new Node(val);
