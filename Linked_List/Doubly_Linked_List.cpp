@@ -89,7 +89,7 @@ private:
 	}
 
 	void printPrev(Node *tail) {
-		// while (tail->next) tail = tail->next;
+		while (tail->next) tail = tail->next;
 		Node *temp = tail;
 		while (temp) {
 			cout << temp->val << ' ';
@@ -112,7 +112,7 @@ public:
 
 	void print() {
 		printNext(head);
-		printPrev(tail);
+		printPrev(head);
 	}
 };
 
