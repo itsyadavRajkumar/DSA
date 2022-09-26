@@ -32,6 +32,7 @@ public:
 		nxt->prev = newNode;
 		newNode->prev = head;
 		head->next = newNode;
+		hashMap[key] = newNode;
 	}
 
 	void deleteNode(Node *delNode) {
@@ -39,6 +40,7 @@ public:
 		Node *nxt = delNode->next;
 		pre->next = nxt;
 		nxt->prev = pre;
+		hashMap.erase(delNode->key);
 		delete delNode;
 	}
 
@@ -50,11 +52,20 @@ public:
 		}
 		if (size()) {
 			Node *delNode = tail->prev;
-			hashMap.erase(delNode->key);
 			deleteNode(delNode);
 		}
 		addNode(key, val);
-		hashMap[key] = tail->prev;
+	}
+
+	int get(int key) {
+		int res = -1;
+		if (hashMap.find(key) != hashMap.end()) {
+			Node *resNode = hashMap[key];
+			res = resNode->val;
+			deleteNode(resNode);
+			addNode(key, res);
+		}
+		return res;
 	}
 
 	bool size() {
