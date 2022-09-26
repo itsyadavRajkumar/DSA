@@ -21,7 +21,7 @@ private:
 	virtual Node* reverseIterative(Node *head) = 0;
 	virtual Node* reverseRecursive(Node *head) = 0;
 	virtual Node* create(int val, Node **head, Node *tail) = 0;
-	virtual Node* deleteIterative(Node *head) = 0;
+	virtual Node* deleteIterative(Node *head, int k) = 0;
 public:
 	Body(): head(NULL), tail(NULL) {}
 	void create(int val) {
@@ -33,6 +33,9 @@ public:
 	void reverse() {
 		// head = reverseIterative(head);
 		head = reverseRecursive(head);
+	}
+	void Delete(int k) {
+		head = deleteIterative(head, k);
 	}
 };
 
@@ -84,7 +87,27 @@ private:
 		return restNode;
 	}
 
-	Node *deleteIterative(Node *head) {}
+	Node *deleteIterative(Node *head, int k) {
+		if (head == NULL) return head;
+		if (k == 1) {
+			Node *pre = head;
+			head = head->Next;
+			delete pre;
+			return head;
+		}
+		Node *pre = NULL, *curr = head;
+		while (curr != nullptr) {
+			if (k == 1) {
+				pre->Next = curr->Next;
+				delete curr;
+				return head;
+			}
+			k--;
+			pre = curr;
+			curr = curr->Next;
+		}
+		return head;
+	}
 };
 
 int main() {
@@ -95,7 +118,8 @@ int main() {
 		ob->create(val);
 	}
 	ob->print();
-	ob->reverse();
+	// ob->reverse();
+	ob->Delete(2); // enter > 0
 	ob->print();
 	return 0;
 }
