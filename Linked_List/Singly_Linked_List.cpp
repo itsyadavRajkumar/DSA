@@ -4,10 +4,10 @@ using namespace std;
 class Node {
 public:
 	int val;
-	Node *Next;
+	Node *next;
 	Node(int val) {
 		this->val = val;
-		Next = NULL;
+		next = NULL;
 	}
 };
 
@@ -48,8 +48,8 @@ private:
 			tail = newNode;
 		}
 		else {
-			tail->Next = newNode;
-			tail = tail->Next;
+			tail->next = newNode;
+			tail = tail->next;
 		}
 		return tail;
 	}
@@ -57,7 +57,7 @@ private:
 	void printInterative(Node *head) {
 		while (head) {
 			cout << head->val << ' ';
-			head = head->Next;
+			head = head->next;
 		}
 		cout << '\n';
 	}
@@ -65,14 +65,14 @@ private:
 	void printRecursive(Node *head) {
 		if (!head) return;
 		cout << head->val << ' ';
-		printRecursive(head->Next);
+		printRecursive(head->next);
 	}
 
 	Node *reverseIterative(Node *head) {
 		Node *curr = head, *pre = NULL, *nxt = head;
 		while (curr) {
-			nxt = curr->Next;
-			curr->Next = pre;
+			nxt = curr->next;
+			curr->next = pre;
 			pre = curr;
 			curr = nxt;
 		}
@@ -80,10 +80,10 @@ private:
 	}
 
 	Node *reverseRecursive(Node *head) {
-		if (head == NULL || head->Next == nullptr) return head;
-		Node *restNode = reverseRecursive(head->Next);
-		head->Next->Next = head;
-		head->Next = nullptr;
+		if (head == NULL || head->next == nullptr) return head;
+		Node *restNode = reverseRecursive(head->next);
+		head->next->next = head;
+		head->next = nullptr;
 		return restNode;
 	}
 
@@ -91,20 +91,20 @@ private:
 		if (head == NULL) return head;
 		if (k == 1) {
 			Node *pre = head;
-			head = head->Next;
+			head = head->next;
 			delete pre;
 			return head;
 		}
 		Node *pre = NULL, *curr = head;
 		while (curr != nullptr) {
 			if (k == 1) {
-				pre->Next = curr->Next;
+				pre->next = curr->next;
 				delete curr;
 				return head;
 			}
 			k--;
 			pre = curr;
-			curr = curr->Next;
+			curr = curr->next;
 		}
 		return head;
 	}
