@@ -42,6 +42,21 @@ public:
 		delete delNode;
 	}
 
+	void put(int key, int val) {
+		if (hashMap.find(key) != hashMap.end()) {
+			Node *delNode = hashMap[key];
+			hashMap.erase(key);
+			deleteNode(delNode);
+		}
+		if (size()) {
+			Node *delNode = tail->prev;
+			hashMap.erase(delNode->key);
+			deleteNode(delNode);
+		}
+		addNode(key, val);
+		hashMap[key] = tail->prev;
+	}
+
 	bool size() {
 		return capacity == hashMap.size();
 	}
