@@ -1,0 +1,122 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+private:
+public:
+    Node *left;
+    Node *right;
+    int data;
+
+    Node(int data)
+    {
+        this->data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+Node *buildTree(Node *root)
+{
+    cout << "Enter  the data: " << endl;
+    int data;
+    cin >> data;
+    root = new Node(data);
+    if (data == -1)
+    {
+        return NULL;
+    }
+    cout << "Enter data for inserting in left for the root with data : " << data << endl;
+    root->left = buildTree(root->left);
+    cout << "Enter data for inserting in right for the root with data : " << data << endl;
+    root->right = buildTree(root->right);
+    return root;
+}
+void buildFromLevelOrder(Node* &root){
+    int data;
+    cout<<"Enter data for root Node : ";
+    cin>>data;
+    root=new Node(data);
+    queue<Node*>Q;
+    Q.push(root);
+    while(!Q.empty()){
+        Node* temp=Q.front();
+        Q.pop();
+
+        cout<<"Enter left node for : "<<temp->data;
+        int leftData;
+        cin>>leftData;
+        if(leftData!=-1){
+            temp->left=new Node(leftData);
+            Q.push(temp->left);
+        }
+
+        cout<<"Enter right node for : "<<temp->data;
+        int rightData;
+        cin>>rightData;
+        if(rightData!=-1){
+            temp->right=new Node(rightData);
+            Q.push(temp->right);
+        }
+        
+
+
+    }
+}
+void levelOrder(Node *root)
+{
+    queue<Node *> Q;
+    Q.push(root);
+    Q.push(NULL);
+    while (!Q.empty())
+    {
+        Node *curr = Q.front();
+        Q.pop();
+        if (curr == NULL)
+        {
+            if(!Q.empty()){
+                Q.push(NULL);
+            }
+            cout<<endl;
+        }
+        else
+        {
+            cout << curr->data << " ";
+            if (curr->left) Q.push(curr->left);
+            if (curr->right) Q.push(curr->right);
+        }
+    }
+}
+int main()
+{
+    Node *root = NULL;
+
+    //root = buildTree(root);
+    buildFromLevelOrder(root);
+    levelOrder(root);
+
+    return 0;
+}
+
+//diameter  of tree
+int solve(Node* root,int &ans){
+    if(root==NULL) return 0;
+
+    int leftH=solve(root->left,ans);
+    int rightH=solve(root->right,ans);
+
+    ans=max(ans,leftH+rightH+1);
+    return max(lefth+rightH)+1;
+}
+
+
+//identical
+bool  identical(Node* root1,Node* root2){
+    if(root1==NULL && root2==NULL) return true;
+
+    else if(root1!=NULL && root2!=NULL){
+        return (root1->data==root2->data && identical(root1->left,root2->left) && identical(root1->right,root2->right));
+    }
+    else{
+        return false;
+    }
+}
