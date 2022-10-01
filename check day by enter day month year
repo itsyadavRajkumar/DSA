@@ -1,0 +1,64 @@
+#include<iostream>
+using namespace std;
+
+void printday(int input) {
+     switch (input) {
+     case 0:
+          cout << "sunday" << endl;
+          break;
+     case 1:
+          cout << "manday" << endl;
+          break;
+     case 2:
+          cout << "Tuesday" << endl;
+          break;
+     case 3:
+          cout << "wednesday" << endl;
+          break;
+     case 4:
+          cout << "thursday" << endl;
+          break;
+     case 5:
+          cout << "friday" << endl;
+          break;
+     case 6:
+          cout << "Saturday" << endl;
+          break;
+     default :
+          cout << "Invalid entry" << endl;
+          break;
+     }
+}
+
+int main() {
+     int month_array[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+     int day, month, year;
+     cout << "Enter the date month and year : ";
+     cin >> day >> month >> year;
+
+     if ( (year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0)) ) {
+          month_array[1] = 29;
+     }
+     year = year - 1;    // because full year has not completed here
+     int i = 0;
+     int sum = 0;
+     while ( (i + 1) != month ) {
+          sum = sum + month_array[i];
+          i++;
+     }
+     int date_month = (day + sum) % 7;
+     int leap_day = year % 100;
+     int remaining_leap = leap_day / 4;
+
+     int leap_month = (year % 400) - leap_day;
+     if (leap_month % 400 == 100) {
+          leap_month = 5;
+     } else   if (leap_month % 400 == 200) {
+          leap_month  = 3;
+     } else   if (leap_month % 400 == 300) {
+          leap_month = 1;
+     }
+     int final_calculation = (date_month + leap_day + remaining_leap + leap_month ) % 7;
+     printday(final_calculation);
+
+}
