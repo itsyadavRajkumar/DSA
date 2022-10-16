@@ -1,0 +1,49 @@
+ int countOfSubstrings(string S, int K) {
+        // code here
+        
+        vector<int>arr(26,0);
+
+       
+
+       for(int i=0;i<K;i++)
+
+       {
+
+           arr[S[i]-'a']++;
+
+       }
+
+       int res=0;
+
+       for(int i=K;i<S.size()+1;i++)
+
+       {
+
+           int count=0;
+
+           for(int x:arr)
+
+           {
+
+               if(x>0)
+
+               count++;
+
+           }
+
+           if (count==K-1)
+
+           res++;
+
+           if(i==S.size())
+
+           break;
+
+           arr[S[i-K]-'a']--;
+
+           arr[S[i]-'a']++;
+
+       }
+
+       return res;
+    }
