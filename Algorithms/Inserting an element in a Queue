@@ -1,0 +1,17 @@
+Description: Here QUEUE is an array with N locations. 
+FRONT and REAR points to the front and rear of the QUEUE. 
+ITEM is the value to be inserted.
+
+1. If (REAR == N) Then [Check for overflow]
+2. Print: Overflow
+3. Else
+4. If (FRONT and REAR == 0) Then [Check if QUEUE is empty]
+    (a) Set FRONT = 1
+    (b) Set REAR = 1
+5. Else
+6. Set REAR = REAR + 1 [Increment REAR by 1]
+    [End of Step 4 If]
+7. QUEUE[REAR] = ITEM
+8. Print: ITEM inserted
+    [End of Step 1 If]
+9. Exit

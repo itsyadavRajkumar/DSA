@@ -1,0 +1,16 @@
+Description: Here QUEUE is an array with N locations.
+FRONT and REAR points to the front and rear of the QUEUE.
+
+1. If (FRONT == 0) Then [Check for underflow]
+2. Print: Underflow
+3. Else
+4. ITEM = QUEUE[FRONT]
+5. If (FRONT == REAR) Then [Check if only one element is left]
+    (a) Set FRONT = 0
+    (b) Set REAR = 0
+6. Else
+7. Set FRONT = FRONT + 1 [Increment FRONT by 1]
+    [End of Step 5 If]
+8. Print: ITEM deleted
+    [End of Step 1 If]
+9. Exit
